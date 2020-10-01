@@ -44,20 +44,19 @@ const ProductItem = (props) => {
             return setNewOptionData(prevState => ({
                 ...prevState,
                 [event.target.name]: event.target.value.split(', ')
-            }))
+            }));
         }
         if(event.target.name === 'optionActive') {
             console.log(event.target.checked)
             return setNewOptionData(prevState => ({
                 ...prevState,
                 optionActive: event.target.checked
-            }))
+            }));
         }
-        
         setNewOptionData(prevState => ({
             ...prevState,
             [event.target.name]: event.target.value
-        }))
+        }));
     };
 
     const handleNewOptionSave = (id, option) => {
@@ -82,7 +81,6 @@ const ProductItem = (props) => {
                             option={option}
                             handleChange={props.handleChange} 
                              />);
-
     return (
         <Paper elevation={3} variant="outlined" square>
             <Grid justify="center" container item xs={12}>

@@ -7,16 +7,18 @@ import {
     saveOptionSuccess, 
     deleteOptionInProgress, 
     deleteOptionSuccess, 
-    deleteOptionFailure, saveUpdatedOptionInProgress
+    deleteOptionFailure, 
+    saveUpdatedOptionInProgress, 
+    saveUpdateOptionFailure
 } from '../actions/option.action';
 
+import { url } from '../../constants'
 
 export const loadOptions = id => async (dispatch, getState) => {
     dispatch(loadOptionsInProgress())
     
     try {
-        let url = `http://localhost:4000/menu/${id}/option`
-        let response = await fetch(url);
+        let response = await fetch(url + `/menu/${id}/option`);
         let data = await response.json();
 
         dispatch(loadOptionsSuccess(data));
@@ -27,10 +29,10 @@ export const loadOptions = id => async (dispatch, getState) => {
 };
 
 export const updateDBOption = option => async (dispatch, getState) => {
-    dispatch(saveUpdatedOptionInProgress())
+    dispatch(saveUpdatedOptionInProgress());
     console.log(option)
     try {
-        await fetch(`http://localhost:4000/menu/option/${option._id}`, {
+        await fetch(url + `/menu/option/${option._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,16 +42,15 @@ export const updateDBOption = option => async (dispatch, getState) => {
 
         })
     } catch (e) {
-
+    dispatch(saveUpdateOptionFailure());
     }
-}
+};
 
 export const saveNewOption = (id, option) => async (dispatch, getState) => {
     dispatch(saveOptionInProgress());
 
     try {
-        let url = `http://localhost:4000/menu/option/${id}`;
-        let response = await fetch(url, {
+        let response = await fetch(url + `/menu/option/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,20 +67,17 @@ export const saveNewOption = (id, option) => async (dispatch, getState) => {
 };
 
 export const deleteOption = id => async (dispatch, getState) => {
-    dispatch(deleteOptionInProgress())
-
+    dispatch(deleteOptionInProgress());
     try {
-        await fetch(`http://localhost:4000/menu/option/${id}`, {
+        await fetch(url + `/menu/option/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${getState().login.token}`,
             },
         });
-
-        dispatch(deleteOptionSuccess(id))
-
+        dispatch(deleteOptionSuccess(id));
     } catch (e) {
-        dispatch(deleteOptionFailure())
+        dispatch(deleteOptionFailure());
     }
 };
 

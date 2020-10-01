@@ -26,11 +26,12 @@ export const login = (state = initalState, action) => {
         }
         case GET_AUTHED_SUCCESS: {
             const { user } = payload;
+            const token = localStorage.getItem('token')
             return {
                 ...state,
                 email: user.user.email,
                 authed: true,
-                token: user.token,
+                token,
                 isLoading: false
             }
         }

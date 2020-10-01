@@ -45,6 +45,7 @@ const ProductItemOption = (props) => {
                 title="Title"
                 name="optionTitle"
                 value={props.option.optionTitle}
+                label="required"
                 changeHandler={props.changeHandler}
                 type="text"
             />
@@ -63,6 +64,7 @@ const ProductItemOption = (props) => {
             <ProductInput 
                 title="Minimum Volume"
                 name="minVol"
+                label="required"
                 value={props.option.minVol}
                 changeHandler={props.changeHandler}
                 type="number"

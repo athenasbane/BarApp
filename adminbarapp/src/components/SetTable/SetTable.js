@@ -5,39 +5,59 @@ import {
     Button,
     TextField
 } from '@material-ui/core';
-import { connect } from 'react-redux';
-
+import { loadTables, setTables } from '../../Redux/thunks/tables.thunk';
+import { connect } from 'react-redux'; 
 import Table from '../SetTable/Table/Table';
 
 const useStyles = makeStyles({
     root: {
-        width: "100%"
+        width: "100%",
+        marginBottom: "40px"
     }
 });
 
 const SetTable = (props) => {
+    const { getTables, tablesList } = props;
+    const [ tableNumbers, setTableNumbers ] = React.useState(0);
+    React.useEffect(() => {
+        getTables()
+    }, [getTables])
 
-    const tables = props.tablesList ? props.tablesList.map(table => <Table />) : <div></div>
+    const tables = tablesList ? 
+        props.tablesList.map(table => <Table key={table._id} 
+            table={table}/>) : <div></div>;
 
     const classes = useStyles();
     return (
-        <Grid className={classes.root} container item direction="row">
+        <Grid 
+            className={classes.root} 
+            container 
+            item 
+            direction="row" 
+            alignContent="center" 
+            justify="center"
+            alignItems="center">
             <Grid item>
                 <Button variant="contained">SAVE TABLES</Button>
             </Grid>
-            <Grid item container direction="row">
+            <Grid item container direction="row" justify="center" alignItems="center">
                 <Grid item>
                     <TextField
+                        onChange={(event) => setTableNumbers(event.target.value)}
                         id="standard-number"
-                        label="Number"
+                        label="Number of Tables:"
                         type="number"
+                        value={tableNumbers}
                         InputLabelProps={{ shrink: true, }}
                         />
                 </Grid>
                 <Grid item>
-                    <Button variant="contained">Set Tables</Button>
+                    <Button 
+                        onClick={() => props.setTables(tableNumbers)} 
+                        variant="contained">Set Tables</Button>
                 </Grid>
-                <Grid item>
+                <Grid container item spacing={1} 
+                direction="row" justify="center" alignContent="center" xs={12}>
                     {tables}
                 </Grid>
             </Grid>
@@ -46,11 +66,12 @@ const SetTable = (props) => {
 };
 
 const mapStateToProps = state => ({
-    tablesList: state.tableData
+    tablesList: state.tables.tableData
 });
 
 const mapDispatchToProps = dispatch => ({
-    getTables: () => dispatch()
+    getTables: () => dispatch(loadTables()),
+    setTables: number => dispatch(setTables(number))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetTable);

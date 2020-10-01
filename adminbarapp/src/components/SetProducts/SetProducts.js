@@ -17,18 +17,23 @@ const SetProducts = (props) => {
     const { products, getProducts } = props;
     const classes = useStyles();
 
+    console.log(products)
     React.useEffect(() => {
         getProducts()
     }, [getProducts]);
 
-    const productList = products.map((product, index) => <ProductItem 
+    const productList = products.map((product, index) => { 
+            console.log(product)
+        return(<ProductItem 
         handleChange={props.setUpdateProduct}
         removeProduct={props.setRemoveProduct} 
         saveProduct={props.setSaveProduct}
         key={product._id}
         id={product._id} 
         product={product} 
-        productIndex={index} />);
+        productIndex={index} />)
+        
+         }) 
 
     return (
         <div className={classes.root}>
@@ -41,7 +46,6 @@ const SetProducts = (props) => {
 const mapStateToProps = state => ({
     products: state.products.productData,
     });
-
 const mapDispatchToProps = dispatch => ({
     getProducts: () => dispatch(loadProducts()),
     setRemoveProduct: id => dispatch(removeProduct(id)) ,

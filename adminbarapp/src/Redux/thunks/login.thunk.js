@@ -6,13 +6,14 @@ import {
     loginSuccess,
     loginFailure
 } from '../actions/login.action';
+import { url } from '../../constants';
 
 export const getAuthed = token => async (dispatch, getState) => {
     
     dispatch(getAuthedInProgress());
     
     try {
-        let response = await fetch('http://localhost:4000/user/auth', {
+        let response = await fetch(url + '/user/auth', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +34,7 @@ export const login = formData => async (dispatch, getState) => {
     dispatch(loginInProgress())
 
     try {
-        let response = await fetch('http://localhost:4000/user/login', {
+        let response = await fetch(url + '/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

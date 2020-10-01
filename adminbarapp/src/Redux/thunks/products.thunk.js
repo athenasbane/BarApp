@@ -13,19 +13,21 @@ import {
     saveNewProductFailure 
 } from '../actions/product.action';
 
+import { url } from '../../constants'
+
 export const loadProducts = () => async (dispatch, getState) => {
     
     dispatch(loadProductsInProgress());
 
     try {
         
-        let response = await fetch('http://localhost:4000/menu');
+        let response = await fetch(url + '/menu');
         let data = await response.json();
 
         dispatch(loadProductsSuccess(data));
 
     } catch (e) {
-        dispatch(loadProductsFailure())
+        dispatch(loadProductsFailure());
     }
 
 };
@@ -35,16 +37,16 @@ export const removeProduct = id => async (dispatch, getState) => {
 
     try {
 
-        await fetch(`http://localhost:4000/menu/${id}`, {
+        await fetch(url + `/menu/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${getState().login.token}`
             }
-        })
+        });
 
-        dispatch(removeProductSuccess(id))
+        dispatch(removeProductSuccess(id));
     } catch (e) {
-        dispatch(removeProductFailure())
+        dispatch(removeProductFailure());
     }
 };
 
@@ -52,7 +54,7 @@ export const saveProduct = product => async (dispatch, getState) => {
     dispatch(saveProductInProgress());
 
     try {
-        await fetch(`http://localhost:4000/menu/${product._id}`,
+        await fetch(url + `/menu/${product._id}`,
         {
             method: 'PATCH',
             headers: {
@@ -60,32 +62,30 @@ export const saveProduct = product => async (dispatch, getState) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(product)
-        })
+        });
 
-        dispatch(saveProductSuccess())
+        dispatch(saveProductSuccess());
 
     } catch (e) {
-        dispatch(saveProductFailure())
+        dispatch(saveProductFailure());
     }
 };
 
 export const saveNewProduct = product => async (dispatch, getState) => {
-    dispatch(saveNewProductInProgress())
+    dispatch(saveNewProductInProgress());
 
     try {
-        let response = await fetch('http://localhost:4000/menu', {
+        let response = await fetch(url + '/menu', {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${getState().login.token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(product)
-        })
-        
+        });
         let data = await response.json();
-
         dispatch(saveNewProductSuccess(data));
     } catch (e) {
-        dispatch(saveNewProductFailure())
+        dispatch(saveNewProductFailure());
     }
 }
