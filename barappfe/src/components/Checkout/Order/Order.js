@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeProductFromOrder } from '../../../Redux/actions/order.action';
 import { makeStyles, Typography, Grid, Button } from '@material-ui/core';
-import DropDown from '../../Inputs/DropDown/DropDown';
+import TableDropDown from '../../Inputs/DropDown/TableDropDown';
 import OrderItem from './OrderItem/OrderItem';
+import { loadTables } from '../../../Redux/thunks/tables.thunk'
+import { sendOrder } from '../../../Redux/thunks/order.thunk';
 
 const useStyles = makeStyles({
     root: {
@@ -16,19 +18,30 @@ const useStyles = makeStyles({
 })
 
 const Order = (props) => {
+    const { getTables, tables } = props;
     const classes = useStyles();
     const [tableOpen, setTableOpen] = React.useState(false);
+    const [tableSelection, setTableSelection] = React.useState('');
+    const [orderCompleteOpen, setOrderCompleteOpen] = React.useState(false);
+
+    const orderCompleteHandler = () => {
+        props.confirmOrder({orderData: [...props.order], tableNumber: tableSelection});
+        setOrderCompleteOpen(true);
+    };
 
     const totaller = props.order.length === 0 ? 0 : props.order
         .map(el => el.price * el.volume)
         .reduce((acc, curr) => acc + curr);
 
-    // add to it's own component
+    React.useEffect(() => {
+        getTables()
+    }, [getTables]);
+
     const orderDetails = props.order.map(item => (
         <OrderItem 
             key={item.title + item.subOption + item.volume} 
             item={item} removeItem={props.removeItem}/>
-    ))
+        ));
 
     return (
         <div>
@@ -65,11 +78,17 @@ const Order = (props) => {
                         className={classes.button} 
                         item xs={12}>
                         {tableOpen ? 
-                            <DropDown data={{ title: 'Table', selectors: ['Table 1', 'Table 2']}}/> 
+                            <TableDropDown 
+                                tableData={tables}
+                                tableSelection={tableSelection}
+                                setTableSelection={setTableSelection}
+                            /> 
                             : null}
                         {tableOpen ? <Button 
                             className={classes.button} 
+                            disabled={tableSelection === ''}
                             variant="contained" 
+                            onClick={() => orderCompleteHandler()}
                             >Confirm Order</Button> : <Button 
                             className={classes.button} 
                             variant="contained" 
@@ -82,13 +101,14 @@ const Order = (props) => {
 };
 
 const mapStateToProps = state => ({
-    order: state.order.data
+    order: state.order.orderData,
+    tables: state.tables.tableData
 })
 
 const mapDispatchToProps = dispatch => ({
-    removeItem: item => {
-        dispatch(removeProductFromOrder(item))
-    }
+    removeItem: item => dispatch(removeProductFromOrder(item)),
+    getTables: () => dispatch(loadTables()),
+    confirmOrder: order => dispatch(sendOrder(order))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

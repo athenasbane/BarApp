@@ -3,27 +3,33 @@ import DropDown from '../../../Inputs/DropDown/DropDown';
 import Increment from '../../../Inputs/Increment/Increment';
 import { connect }from 'react-redux';
 import { addProductToOrder } from '../../../../Redux/actions/order.action';
+import { loadOptions } from '../../../../Redux/thunks/option.thunk';
 
-const ProductForm = (props) => {
-
-    const addItemHandler = (subOption, volume, price) => {
+const ProductForm = ({options, addToOrder, getOptions, handleChange, title, id}) => {
+    const addItemHandler = (subOption, volume, price, optionId) => {
         const order = {
-            title: props.title,
-            subOption,
+            title,
+            optionId, 
+            subOption,  
             volume,
             price
         };
-        props.addToOrder(order);
-        props.handleChange()
-
+        addToOrder(order);
+        handleChange();
     };
 
-    const menu = (props.inputOptions.map(option => {
+    const inputOptions = options.filter(el => el.product === id);
+
+    React.useEffect(() => {
+        getOptions(id)
+    }, [getOptions, id])
+
+    const menu = (inputOptions.map(option => {
         switch(option.type) {
             case 'increment':
-                return <Increment key={option.title} data={option} addItemHandler={addItemHandler} />
+                return <Increment key={option._id} data={option} addItemHandler={addItemHandler} />
             case 'dropdown':
-                return <DropDown key={option.title} data={option} addItemHandler={addItemHandler} />
+                return <DropDown key={option._id} data={option} addItemHandler={addItemHandler} />
             default:
                 return null;
         }
@@ -36,10 +42,13 @@ const ProductForm = (props) => {
     );
 };
 
-const mapDispatchToProps = dispatch => ({
-    addToOrder: order => {
-       dispatch(addProductToOrder(order))
-    }
-})
+const mapStateToProps = state => ({
+    options: state.option.optionData 
+});
 
-export default connect(undefined, mapDispatchToProps)(ProductForm);
+const mapDispatchToProps = dispatch => ({
+    addToOrder: order => dispatch(addProductToOrder(order)),
+    getOptions: id => dispatch(loadOptions(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductForm);

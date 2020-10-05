@@ -1,24 +1,46 @@
 import {
-    ADD_PRODUCT_TO_ORDER,
-    REMOVE_PRODUCT_FROM_ORDER,
     CONFIRM_ORDER_IN_PROCESS,
     CONFIRM_ORDER_SUCCESS,
-    CONFIRM_ORDER_FAILURE
+    CONFIRM_ORDER_FAILURE, 
+    ADD_PRODUCT_TO_ORDER,
+    REMOVE_PRODUCT_FROM_ORDER, ACKNOWLEDGE_ORDER
 } from '../actions/order.action';
 
 const initalState = {
     isLoading: false,
     tableNo: 0,
-    data: []
+    orderData: [],
+    confirmedOrder: []
 };
 
 export const order = (state = initalState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case ADD_PRODUCT_TO_ORDER:{
+        case CONFIRM_ORDER_IN_PROCESS: {
+            return {
+                ...state,
+                isLoading: true
+            };
+        }
+        case CONFIRM_ORDER_SUCCESS: {
+            return {
+                ...state,
+                confirmedOrder: state.orderData,
+                orderData: [],
+                isLoading: false
+            };
+        }
+        case CONFIRM_ORDER_FAILURE: {
+            return {
+                ...state,
+                confirmedOrder: ['Error', 'Something went wrong with your order, please try again.'],
+                isLoading: false
+            };
+        }
+        case ADD_PRODUCT_TO_ORDER: {
             const { product: productToAdd } = payload;
-            const currentData = [...state.data]
+            const currentData = [...state.orderData]
             const indexOfDup = currentData.findIndex(el => (el.title && el.subOption) === 
                 (productToAdd.title && productToAdd.subOption))
             if (indexOfDup > -1) {
@@ -26,12 +48,12 @@ export const order = (state = initalState, action) => {
                     productToAdd.volume + currentData[indexOfDup].volume
                 return {
                     ...state,
-                    data: currentData
+                    orderData: currentData
                 }
             }
             return {
                 ...state,
-                data: [ ...state.data, productToAdd ]
+                orderData: [ ...state.orderData, productToAdd ]
 
             };
         }
@@ -39,30 +61,19 @@ export const order = (state = initalState, action) => {
             const { product: productRemove } = payload;
             return {
                 ...state,
-                data: state.data.filter(product => (product.title && product.subOption) !== 
+                orderData: state.orderData.filter(product => (product.title && product.subOption) !== 
                         (productRemove.title && productRemove.subOption))
             };
+        }
+        case ACKNOWLEDGE_ORDER: {
+            return {
+                ...initalState
+            };
         } 
-        case CONFIRM_ORDER_IN_PROCESS: {
+        default: {
             return {
-                ...state,
-                isLoading: true,
+                ...state
             };
         }
-        case CONFIRM_ORDER_SUCCESS: {
-            const { order } = payload;
-            return {
-                ...state,
-                isLoading: false
-            };
-        }
-        case CONFIRM_ORDER_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-            };
-        }
-        default:
-            return state;
     }
 };

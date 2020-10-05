@@ -10,11 +10,11 @@ const Products = ({startLoadingProducts, products, isLoading}) => {
     }, [startLoadingProducts])
 
     const menu = products.map((prod, index) => (<ProductItem 
-                                                inputOptions={prod.inputOptions}
-                                                key={prod.title} 
+                                                key={prod._id}
+                                                id={prod._id} 
                                                 index={index} 
                                                 title={prod.title} 
-                                                active={prod.active}/>))                                
+                                                active={prod.active}/>));                                
 
     return (
         <React.Fragment>
@@ -24,7 +24,7 @@ const Products = ({startLoadingProducts, products, isLoading}) => {
 };
 
 const mapStateToProps = state => ({
-    products: state.products.data,
+    products: state.products.productData,
     isLoading: state.products.isLoading
 })
 

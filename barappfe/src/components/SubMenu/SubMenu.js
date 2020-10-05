@@ -62,7 +62,7 @@ const SubMenu = (props) => {
 };
 
 const mapStateToProps = state => ({
-    products: state.products.data,
+    products: state.products.productData,
 });
 
 export default connect(mapStateToProps)(SubMenu);

@@ -17,13 +17,11 @@ const SetProducts = (props) => {
     const { products, getProducts } = props;
     const classes = useStyles();
 
-    console.log(products)
     React.useEffect(() => {
         getProducts()
     }, [getProducts]);
 
     const productList = products.map((product, index) => { 
-            console.log(product)
         return(<ProductItem 
         handleChange={props.setUpdateProduct}
         removeProduct={props.setRemoveProduct} 

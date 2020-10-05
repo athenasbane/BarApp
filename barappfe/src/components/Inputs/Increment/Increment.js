@@ -33,7 +33,7 @@ const Increment = (props) => {
         setVolume(event.target.value)
     }
     const activeValidation = () => {
-        if(!props.data.active) {
+        if(!props.data.optionActive) {
             return true;
         }
         if(volume > props.data.minVol) {
@@ -43,14 +43,14 @@ const Increment = (props) => {
         }
     };
     const addItem = () => {
-        props.addItemHandler(props.data.title, volume, props.data.price)
+        props.addItemHandler(props.data.optionTitle, volume, props.data.price, props.data._id)
         setVolume(0)
     }
     return (
         <div className={classes.root}>
             <Grid container direction="row">
                 <Grid item xs={6}>
-                    <InputLabel>{props.data.title}{props.data.active ? null : " - SOLD OUT"}</InputLabel>
+                    <InputLabel>{props.data.optionTitle}{props.data.optionActive ? null : " - SOLD OUT"}</InputLabel>
                 </Grid>
                 <Grid item xs={6}>
                     <Typography>£&nbsp;{props.data.price.toFixed(2)}</Typography>
@@ -73,7 +73,7 @@ const Increment = (props) => {
                     </Grid>
                     <Grid item xs={3}>
                         <input 
-                            disabled={!props.data.active} 
+                            disabled={!props.data.optionActive} 
                             className={classes.textBox} 
                             onChange={(event) => handleInput(event)} 
                             type="number" 
@@ -81,7 +81,7 @@ const Increment = (props) => {
                     </Grid>
                     <Grid item xs={3}>
                         <Button 
-                            disabled={!props.data.active}  
+                            disabled={!props.data.optionActive}  
                             onClick={() => setVolume(prevState => (prevState + 1))}>
                                 <AddIcon />
                         </Button>

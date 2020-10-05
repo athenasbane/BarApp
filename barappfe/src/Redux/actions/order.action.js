@@ -26,3 +26,8 @@ export const CONFIRM_ORDER_FAILURE = 'CONFIRM_ORDER_FAILURE';
 export const confirmOrderFailure = () => ({
     type: CONFIRM_ORDER_FAILURE,
 });
+
+export const ACKNOWLEDGE_ORDER = 'ACKNOWLEDGE_ORDER';
+export const acknowledgeOrder = () => ({
+    type: ACKNOWLEDGE_ORDER
+});

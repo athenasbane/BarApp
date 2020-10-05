@@ -32,14 +32,16 @@ const useStyles = makeStyles({
 
 const ProductItem = (props) => {
     const classes = useStyles();
-    const [ expanded, setExpanded ] = React.useState(false)
+    const [ expanded, setExpanded ] = React.useState(false);
 
     const handleChange = (title) => (event, isExpanded) => {
         setExpanded(isExpanded ? title : false);
     };
 
     return (
-        <Accordion expanded={expanded === props.title} className={props.index % 2 === 1 ? classes.paperOdd : classes.paperEven} onChange={handleChange(props.title)} disabled={!props.active}>
+        <Accordion expanded={expanded === props.title} 
+        className={props.index % 2 === 1 ? classes.paperOdd : classes.paperEven} 
+        onChange={handleChange(props.title)} disabled={!props.active}>
             <AccordionSummary
                 expandIcon={<AddIcon />}
                 aria-controls={props.title + '-content'}
@@ -48,7 +50,7 @@ const ProductItem = (props) => {
                     {!props.active ? <Typography className={classes.subHeading}>Sold Out</Typography> : null}
             </AccordionSummary>
             <AccordionDetails>
-                    <ProductForm title={props.title} inputOptions={props.inputOptions} handleChange={handleChange(props.title)} />
+                    <ProductForm title={props.title} id={props.id} handleChange={handleChange(props.title)} />
             </AccordionDetails>
         </Accordion>
     );

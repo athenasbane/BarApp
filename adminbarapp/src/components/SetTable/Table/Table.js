@@ -5,7 +5,6 @@ import {
     Paper,
     makeStyles, 
     Typography,
-    Button,
     FormControlLabel,
     Switch
 } from '@material-ui/core';
@@ -40,7 +39,7 @@ const Table = (props) => {
                     <Grid item xs={7}>
                         <Typography>Table No. {props.table.tableNum}</Typography>
                     </Grid>
-                    <Grid item xs={5} direction="column"> 
+                    <Grid container item xs={5} direction="column"> 
                         <FormControlLabel
                             control={<Switch 
                                 checked={props.table.tableActive} 

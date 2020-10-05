@@ -60,7 +60,7 @@ const Footer = (props) => {
 )};
 
 const mapStateToProps = state => ({
-    order: state.order.data
+    order: state.order.orderData
 })
 
 export default connect(mapStateToProps)(Footer);

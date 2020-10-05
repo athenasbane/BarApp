@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const productRouter = require('./routers/product/product.router');
 const userRouter = require('./routers/user/user.router');
 const tablesRouter = require('./routers/table/table.router');
+const orderRouter = require('./routers/order/order.router');
 const { PORT, MONGO_URI } = require('./constants');
 
 const app = express();
@@ -15,7 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(productRouter, userRouter, tablesRouter);
+app.use(productRouter, userRouter, tablesRouter, orderRouter);
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
