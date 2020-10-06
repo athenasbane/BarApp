@@ -11,6 +11,7 @@ I will provide a full installation guide once this is out of beta.
 YouTube: Coming soon...
 
 ** Customer View **
+
 ![picture](IMG/CustomerImg.png)
 ** Bar Staff View **
 ![picture](IMG/ServerImg.png)
