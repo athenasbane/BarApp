@@ -10,7 +10,7 @@ const initalState = {
     isLoading: false,
     tableNo: 0,
     orderData: [],
-    confirmedOrder: []
+    confirmedOrder: ''
 };
 
 export const order = (state = initalState, action) => {
@@ -26,7 +26,7 @@ export const order = (state = initalState, action) => {
         case CONFIRM_ORDER_SUCCESS: {
             return {
                 ...state,
-                confirmedOrder: state.orderData,
+                confirmedOrder: ['Success', 'Your order has been accepted!'],
                 orderData: [],
                 isLoading: false
             };
@@ -67,7 +67,8 @@ export const order = (state = initalState, action) => {
         }
         case ACKNOWLEDGE_ORDER: {
             return {
-                ...initalState
+                ...state,
+                confirmedOrder: ''
             };
         } 
         default: {

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     border: {
         borderRight: '1px solid black'
     }
-})
+});
 
 const Footer = (props) => {
     const classes = useStyles();

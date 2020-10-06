@@ -32,33 +32,30 @@ const Checkout = (props) => {
             <Order data={props.order} checkoutClickHandler={props.checkoutClickHandler} />
         </div>);
 
+    const acknowledgeClickHandler = () => {
+        props.recievedOrder();
+        props.checkoutClickHandler();
+    };
+
     const orderConfirmation = (
         <div className={classes.paper}>
             <h2 id="simple-modal-title">About your order:</h2>
-            {props.confirmedOrder[0] === 'Error' ?  <Grid container>
+            <Grid container direction="column">
                 <Grid item>
-                    <Typography>Your order has being confirmed!</Typography>
+                    <Typography>{props.confirmedOrder[1]}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography>Total&nbsp;Price:&nbsp;£&nbsp;
-                        {/* {props.confirmedOrder.totalPrice.toFixed(2)} */}
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <Button variant="contained">OK</Button>
+                    <Button onClick={acknowledgeClickHandler} variant="contained">OK</Button>
                 </Grid>
             </Grid>
-            :
-            <Typography>{props.confirmedOrder[1]}</Typography> 
-            }
         </div>
     );
 
-    console.log(props.confirmedOrder.totalPrice)
+    console.log(props.confirmedOrder)
 
     return (
         <Modal open={props.open} onClose={props.checkoutClickHandler}>
-           {props.confirmedOrder !== [] ? body : orderConfirmation } 
+           {props.confirmedOrder === '' ? body : orderConfirmation } 
         </Modal>
     );
 };
