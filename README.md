@@ -8,7 +8,7 @@ I will provide a full installation guide once this is out of beta.
 
 ## Usage
 
-YouTube: Coming soon...
+YouTube Demo: https://youtu.be/4BsfIE-5Hk0
 
 **Customer View**
 
