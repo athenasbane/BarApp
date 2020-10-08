@@ -4,10 +4,7 @@ const Order = require('../../models/order.model');
 const InputOption = require('../../models/inputOptions.model');
 const app = require('../../app')
 
-
 router.get('/order', async (req, res) => {
-    
-
     try {
         const orders = await Order.find({});
         res.status(200).send(orders);
@@ -27,16 +24,17 @@ router.post('/order', async (req, res) => {
         return total;
     };
    try {
-    const order = new Order({
-        orderedItems: [...req.body.order.orderData],
-        tableNumber: req.body.order.tableNumber,
-        totalPrice: await priceCalc(req.body.order.orderData)
+        const order = new Order({
+            orderedItems: [...req.body.order.orderData],
+            tableNumber: req.body.order.tableNumber,
+            totalPrice: await priceCalc(req.body.order.orderData)
     });
+    
     await order.save();
-    const data = await Order.findById({ _id: order._id})
-    console.log(data)
-    const io = req.app.get('socketio')
-    io.emit('NewOrder', data)
+    const data = await Order.findById({ _id: order._id});
+    
+    const io = req.app.get('socketio');
+    io.emit('NewOrder', data);
     
     res.status(201).send(order);
    } catch (e) {

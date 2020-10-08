@@ -34,16 +34,16 @@ const Order = props => {
         const difference = ((now.getTime() - newTime.getTime()) / 1000).toFixed(0);
         if (difference > 60) {
             return `${(difference / 60).toFixed(0)} Minutes ago...`;
-        }
-        return `${difference} Seconds ago...`
+        } 
+        return `${difference} Seconds ago...`;
     };
 
     const [time, setTime] = React.useState(timeSince(props.order.createdAt));
    
     React.useEffect(function (){
         setInterval(() => {
-            setTime(timeSince(props.order.createdAt))
-        }, 60000)
+            setTime(timeSince(props.order.createdAt));
+        }, 1000);
     })
 
     return (

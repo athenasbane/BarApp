@@ -18,21 +18,20 @@ const useStyles = makeStyles({
 });
 
 const Canvas = () => {
-    const [ orderData, setOrderData ] = React.useState([])
-
+    const [ orderData, setOrderData ] = React.useState([]);
     const getData = async () => {
-        let response = await fetch(backendURL + '/order')
+        let response = await fetch(backendURL + '/order');
         let data = await response.json();
-        setOrderData(data)
+        setOrderData(data);
     };
 
     React.useEffect(() => {
         socket.on('NewOrder', data => {
-            setOrderData(oldState => {
+            setOrderData((oldState = []) => {
                 setOrderData([...oldState, data]);
-            })
-        })
-    }, [])
+            });
+        });
+    }, []);
 
     React.useEffect(() => {
         getData();
@@ -45,14 +44,15 @@ const Canvas = () => {
         await getData();
     };
 
-    const orders = orderData.map(order => { 
-        if (!order.delivered) { 
-            return (<Order order={order} 
-                    key={order._id} 
-                    deliveredHandler={deliveredHandler}/>
-            );
+    const orders = orderData.filter(order => {
+        if (order.delivered) { 
+            return false;
         }
-    });
+        return true;
+        }).map(order => (<Order order={order} 
+                    key={order._id} 
+                    deliveredHandler={deliveredHandler}/>)
+        );
 
     const classes = useStyles();
     return (

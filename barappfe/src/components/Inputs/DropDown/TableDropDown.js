@@ -5,14 +5,10 @@ import {
     InputLabel, 
     Select,
     Grid,
-    Typography,
-    Button
+
 } from '@material-ui/core';
 
-const TableDropDown = (props) => {
-    const [selection, setSelection] = React.useState('');
-
-    return (
+const TableDropDown = (props) => (
         <div>
             <FormControl>
                 <Grid container direction="column">
@@ -45,6 +41,5 @@ const TableDropDown = (props) => {
             </FormControl>
         </div>
     );
-};
 
 export default TableDropDown;

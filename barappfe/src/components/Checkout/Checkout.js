@@ -7,7 +7,7 @@ import {
     Button
 } from '@material-ui/core';
 import { sendOrder } from '../../Redux/thunks/order.thunk';
-import { acknowledgeOrder } from '../../Redux/actions/order.action'
+import { acknowledgeOrder } from '../../Redux/actions/order.action';
 import { connect } from 'react-redux';
 
 import Order from './Order/Order';
@@ -50,8 +50,6 @@ const Checkout = (props) => {
             </Grid>
         </div>
     );
-
-    console.log(props.confirmedOrder)
 
     return (
         <Modal open={props.open} onClose={props.checkoutClickHandler}>

@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles, Typography, Grid, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { removeProductFromOrder } from '../../../Redux/actions/order.action';
-import { makeStyles, Typography, Grid, Button } from '@material-ui/core';
 import TableDropDown from '../../Inputs/DropDown/TableDropDown';
 import OrderItem from './OrderItem/OrderItem';
 import { loadTables } from '../../../Redux/thunks/tables.thunk'
 import { sendOrder } from '../../../Redux/thunks/order.thunk';
+
 
 const useStyles = makeStyles({
     root: {
@@ -15,18 +17,16 @@ const useStyles = makeStyles({
     button: {
         width: '100%'
     }
-})
+});
 
 const Order = (props) => {
     const { getTables, tables } = props;
     const classes = useStyles();
     const [tableOpen, setTableOpen] = React.useState(false);
     const [tableSelection, setTableSelection] = React.useState('');
-    const [orderCompleteOpen, setOrderCompleteOpen] = React.useState(false);
 
     const orderCompleteHandler = () => {
         props.confirmOrder({orderData: [...props.order], tableNumber: tableSelection});
-        setOrderCompleteOpen(true);
     };
 
     const totaller = props.order.length === 0 ? 0 : props.order
@@ -38,67 +38,92 @@ const Order = (props) => {
     }, [getTables]);
 
     const orderDetails = props.order.map(item => (
-        <OrderItem 
-            key={item.title + item.subOption + item.volume} 
-            item={item} removeItem={props.removeItem}/>
+      <OrderItem 
+        key={item.title + item.subOption + item.volume} 
+        item={item}
+        removeItem={props.removeItem}
+      />
         ));
 
     return (
-        <div>
-            <Grid className={classes.root} container direction="column">
-                <Grid className={classes.root} container item direction="row">
-                    <Grid item xs={4}>
-                        <Typography>ITEM</Typography>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Typography>AMOUNT</Typography>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Typography>COST</Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography> </Typography>
-                    </Grid>
-                </Grid>
-                {orderDetails}
-                <Grid container item direction="column">
-                    <Grid item>
-                        <Typography>
-                            Total:&nbsp;£&nbsp;{totaller.toFixed(2)}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button 
-                            className={classes.button} 
-                            variant="contained" 
-                            color="primary" 
-                            onClick={props.checkoutClickHandler}>Back to Menu</Button>
-                    </Grid>
-                    <Grid 
-                        className={classes.button} 
-                        item xs={12}>
-                        {tableOpen ? 
-                            <TableDropDown 
-                                tableData={tables}
-                                tableSelection={tableSelection}
-                                setTableSelection={setTableSelection}
-                            /> 
-                            : null}
-                        {tableOpen ? <Button 
-                            className={classes.button} 
-                            disabled={tableSelection === ''}
-                            variant="contained" 
-                            onClick={() => orderCompleteHandler()}
-                            >Confirm Order</Button> : <Button 
-                            className={classes.button} 
-                            variant="contained" 
-                            onClick={() => setTableOpen(!tableOpen)}>Place Order</Button>}
-                    </Grid>
-                </Grid>
+      <div>
+        <Grid className={classes.root} container direction="column">
+          <Grid className={classes.root} container item direction="row">
+            <Grid item xs={4}>
+              <Typography>ITEM</Typography>
             </Grid>
-        </div>
+            <Grid item xs={3}>
+              <Typography>AMOUNT</Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography>COST</Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography> </Typography>
+            </Grid>
+          </Grid>
+          {orderDetails}
+          <Grid container item direction="column">
+            <Grid item>
+              <Typography>
+                Total:&nbsp;£&nbsp;
+                {totaller.toFixed(2)}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Button 
+                className={classes.button} 
+                variant="contained" 
+                color="primary" 
+                onClick={props.checkoutClickHandler}
+              >
+                Back to Menu
+
+              </Button>
+            </Grid>
+            <Grid 
+              className={classes.button} 
+              item
+              xs={12}
+            >
+              {tableOpen ? (
+                <TableDropDown 
+                  tableData={tables}
+                  tableSelection={tableSelection}
+                  setTableSelection={setTableSelection}
+                />
+                        ) 
+                            : null}
+              {tableOpen ? (
+                <Button 
+                  className={classes.button} 
+                  disabled={tableSelection === ''}
+                  variant="contained" 
+                  onClick={() => orderCompleteHandler()}
+                >
+                  Confirm Order
+                </Button>
+) : (
+  <Button 
+    className={classes.button} 
+    variant="contained" 
+    onClick={() => setTableOpen(!tableOpen)}
+  >
+    Place Order
+  </Button>
+)}
+            </Grid>
+          </Grid>
+        </Grid>
+      </div>
     );
 };
+
+Order.propTypes = {
+    getTables: PropTypes.func,
+    tables: PropTypes.arrayOf(PropTypes.object),
+    
+}
 
 const mapStateToProps = state => ({
     order: state.order.orderData,
