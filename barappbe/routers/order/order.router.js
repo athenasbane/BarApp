@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../../models/order.model');
 const InputOption = require('../../models/inputOptions.model');
-const app = require('../../app')
+const app = require('../../app');
 
 router.get('/order', async (req, res) => {
     try {
