@@ -1,35 +1,38 @@
 import React from 'react';
-import ProductItem from './ProductItem/ProductItem';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ProductItem from './ProductItem/ProductItem';
 import { loadProducts } from '../../Redux/thunks/products.thunk';
 
-const Products = ({startLoadingProducts, products, isLoading}) => {
+const Products = ({ startLoadingProducts, products }) => {
+  React.useEffect(() => {
+    startLoadingProducts();
+  }, [startLoadingProducts]);
 
-    React.useEffect(() => {
-        startLoadingProducts()
-    }, [startLoadingProducts])
+  const menu = products.map((prod, index) => (
+    <ProductItem
+      key={prod._id}
+      id={prod._id}
+      index={index}
+      title={prod.title}
+      active={prod.active}
+    />
+  ));
 
-    const menu = products.map((prod, index) => (<ProductItem 
-                                                key={prod._id}
-                                                id={prod._id} 
-                                                index={index} 
-                                                title={prod.title} 
-                                                active={prod.active}/>));                                
-
-    return (
-        <React.Fragment>
-            {menu}
-        </React.Fragment>    
-    );
+  return <>{menu}</>;
 };
 
-const mapStateToProps = state => ({
-    products: state.products.productData,
-    isLoading: state.products.isLoading
-})
+Products.propTypes = {
+  startLoadingProducts: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object),
+};
 
-const mapDispatchToProps = dispatch => ({
-    startLoadingProducts: () => dispatch(loadProducts())
-})
+const mapStateToProps = (state) => ({
+  products: state.products.productData,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  startLoadingProducts: () => dispatch(loadProducts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

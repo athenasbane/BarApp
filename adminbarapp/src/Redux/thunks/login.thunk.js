@@ -1,54 +1,49 @@
 import {
-    getAuthedInProgress,
-    getAuthedSuccess,
-    getAuthedFailure,
-    loginInProgress,
-    loginSuccess,
-    loginFailure
+  getAuthedInProgress,
+  getAuthedSuccess,
+  getAuthedFailure,
+  loginInProgress,
+  loginSuccess,
+  loginFailure,
 } from '../actions/login.action';
 import { url } from '../../constants';
 
-export const getAuthed = token => async (dispatch, getState) => {
-    
-    dispatch(getAuthedInProgress());
-    
-    try {
-        let response = await fetch(url + '/user/auth', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ token })
-        });
-        let user = await response.json();
+export const getAuthed = (token) => async (dispatch) => {
+  dispatch(getAuthedInProgress());
 
-        dispatch(getAuthedSuccess(user));
+  try {
+    const response = await fetch(`${url}/user/auth`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
+    const user = await response.json();
 
-    } catch (e) {
-        dispatch(getAuthedFailure())
-    }
+    dispatch(getAuthedSuccess(user));
+  } catch (e) {
+    dispatch(getAuthedFailure());
+  }
 };
 
-export const login = formData => async (dispatch, getState) => {
+export const login = (formData) => async (dispatch) => {
+  dispatch(loginInProgress());
 
-    dispatch(loginInProgress())
+  try {
+    const response = await fetch(`${url}/user/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ formData }),
+    });
 
-    try {
-        let response = await fetch(url + '/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ formData })
-        });
+    const user = await response.json();
 
-        let user = await response.json();
-
-        dispatch(loginSuccess(user));
-        console.log(user)
-        // localStorage.setItem('token', user.token)
-    } catch (e) {
-        console.log('Failed Login')
-        dispatch(loginFailure());
-    }
+    dispatch(loginSuccess(user));
+  } catch (e) {
+    console.log('Failed Login');
+    dispatch(loginFailure());
+  }
 };
