@@ -161,8 +161,6 @@ const ProductItemOption = ({ option, setRemoveOption, setUpdateDBOption, setUpda
   );
 };
 
-// setRemoveOption, setUpdateDBOption, setUpdateOption
-
 ProductItemOption.propTypes = {
   option: PropTypes.shape({
     optionActive: PropTypes.bool.isRequired,

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "test": "mocha --watch"
+    "dev": "NODE_ENV=dev nodemon -r dotenv/config app.js",
+    "test": "NODE_ENV=test jest --setupFiles dotenv/config --verbose --runInBand --watch"
   },
   "keywords": [],
   "author": "",
@@ -17,14 +17,14 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.4",
-    "sinon": "^9.2.0",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "mocha": "^8.1.3",
+    "jest": "^26.5.2",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

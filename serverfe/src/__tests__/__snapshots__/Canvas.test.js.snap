@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Canvas snapshot renders 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-direction-xs-column"
+  />
+</div>
+`;

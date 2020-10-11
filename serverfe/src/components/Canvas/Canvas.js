@@ -17,12 +17,19 @@ const useStyles = makeStyles({
     }
 });
 
+
+
 const Canvas = () => {
     const [ orderData, setOrderData ] = React.useState([]);
+    
     const getData = async () => {
-        let response = await fetch(backendURL + '/order');
-        let data = await response.json();
-        setOrderData(data);
+        try {
+            let response = await fetch(backendURL + '/order');
+            let data = await response.json();
+            setOrderData(data);
+        } catch (e) {
+            console.log(e)
+        } 
     };
 
     React.useEffect(() => {
@@ -39,7 +46,7 @@ const Canvas = () => {
 
     const deliveredHandler = async (id) => {
         await fetch(backendURL + `/order/${id}`, {
-            method: 'PATCH'
+            method: 'PATCH',
         });
         await getData();
     };

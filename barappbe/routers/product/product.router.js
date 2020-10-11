@@ -37,7 +37,7 @@ router.post('/menu', auth, async (req, res) => {
         await item.save();
         res.status(201).send(item);
     } catch (e) {
-        res.status(404).send();
+        res.status(500).send();
     }
 });
 

@@ -1,4 +1,4 @@
-# The Bar App         ![version](https://img.shields.io/badge/version-0.5.1-yellow.svg)
+# The Bar App         ![version](https://img.shields.io/badge/version-0.5.3-yellow.svg)
 
 The Bar App is an open source application for bars, restaurants  and cafes for customers to order food and drinks in a covid-19 compliant way!
 
