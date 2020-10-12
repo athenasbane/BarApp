@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order Component Tests renders correctly 1`] = `
+<div
+  className="MuiGrid-root MuiGrid-item"
+>
+  <div
+    className="MuiPaper-root MuiAccordion-root makeStyles-accordion-1 MuiAccordion-rounded MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      aria-controls="panel1a-content"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="MuiButtonBase-root MuiAccordionSummary-root"
+      id="panel1a-header"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <div
+        className="MuiAccordionSummary-content"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-5"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <p
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              TABLE NO: 
+              1
+               
+            </p>
+          </div>
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <p
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              Number of Items: 
+              1
+               
+            </p>
+          </div>
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <p
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              Time Since Order: 
+              0 Seconds ago...
+               
+            </p>
+          </div>
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <p
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              To Pay: £ 
+              6.00
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-disabled={false}
+        aria-hidden={true}
+        className="MuiButtonBase-root MuiIconButton-root MuiAccordionSummary-expandIcon MuiIconButton-edgeEnd"
+        onBlur={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        role={null}
+        tabIndex={null}
+      >
+        <span
+          className="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div
+      className="MuiCollapse-container MuiCollapse-hidden"
+      style={
+        Object {
+          "minHeight": "0px",
+        }
+      }
+    >
+      <div
+        className="MuiCollapse-wrapper"
+      >
+        <div
+          className="MuiCollapse-wrapperInner"
+        >
+          <div
+            aria-labelledby="panel1a-header"
+            id="panel1a-content"
+            role="region"
+          >
+            <div
+              className="MuiAccordionDetails-root"
+            >
+              <div
+                className="MuiGrid-root makeStyles-root-2 MuiGrid-container MuiGrid-spacing-xs-5 MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+              >
+                <div
+                  className="MuiGrid-root MuiGrid-item"
+                >
+                  <div
+                    className="MuiGrid-root makeStyles-root-4 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-justify-xs-center"
+                  >
+                    <div
+                      className="MuiGrid-root MuiGrid-item"
+                    >
+                      <p
+                        className="MuiTypography-root MuiTypography-body1"
+                      >
+                        <strong>
+                          Title:
+                        </strong>
+                         
+                        Strongbow
+                      </p>
+                    </div>
+                    <div
+                      className="MuiGrid-root MuiGrid-item"
+                    >
+                      <p
+                        className="MuiTypography-root MuiTypography-body1"
+                      >
+                        <strong>
+                          Option:
+                        </strong>
+                         
+                        Half-Pint
+                      </p>
+                    </div>
+                    <div
+                      className="MuiGrid-root MuiGrid-item"
+                    >
+                      <p
+                        className="MuiTypography-root MuiTypography-body1"
+                      >
+                        <strong>
+                          Volume:
+                        </strong>
+                         
+                        3
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="MuiGrid-root makeStyles-buttonBox-3 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item"
+                >
+                  <div
+                    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                  >
+                    <button
+                      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <span
+                        className="MuiButton-label"
+                      >
+                        Working On
+                      </span>
+                    </button>
+                  </div>
+                  <div
+                    className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                  >
+                    <button
+                      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-fullWidth"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <span
+                        className="MuiButton-label"
+                      >
+                        Delivered
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

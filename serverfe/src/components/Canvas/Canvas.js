@@ -17,8 +17,6 @@ const useStyles = makeStyles({
     }
 });
 
-
-
 const Canvas = () => {
     const [ orderData, setOrderData ] = React.useState([]);
     

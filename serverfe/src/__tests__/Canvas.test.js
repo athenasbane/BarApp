@@ -1,34 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import renderer, { act } from 'react-test-renderer';
-import Canvas, {getData} from '../components/Canvas/Canvas';
-import { render, fireEvent, getByTestId, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
+import Canvas from '../components/Canvas/Canvas';
 
-global.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve([
-        {
-            orderData: [
-
-            ],
-            tableNum: 5,
-            delivered: false,
-            _id: 5654667
-        }
-    ])
-}));
-
-describe('Canvas', () => {
-    test('snapshot renders', () => {
-        const component = renderer.create(<Canvas />);
-        let tree = component.toJSON();
+describe('Canvas Tests', () => {
+    test('renders correctly', () => {
+        const tree = renderer
+            .create(<Canvas />)
+            .toJSON();
         expect(tree).toMatchSnapshot();
-    });
-
-    describe('getData', () => {
-        it('gets the data', async() => {
-            await act(() => render(<Canvas />));
-            const { container } = render(<Canvas />)
-            expect(screen.getBy())
-        })
     })
-});
+}) 

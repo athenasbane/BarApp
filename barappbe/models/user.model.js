@@ -3,84 +3,89 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../constants');
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
     },
     password: {
-        type: String,
-        required: true,
-        minlength: 7,
-        trim: true
+      type: String,
+      required: true,
+      minlength: 7,
+      trim: true,
     },
-    tokens: [{
+    tokens: [
+      {
         token: {
-            type: String,
-            required: true
-        }
-    }]
-},{
-    timestamps: true
-});
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.pre('save', async function (next) {
-    const user = this;
+  const user = this;
 
-    if(user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8);
-    }
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
 
-    next();
+  next();
 });
 
 userSchema.methods.toJSON = function () {
-    const user = this;
-    const userObject = user.toObject();
+  const user = this;
+  const userObject = user.toObject();
 
-    delete userObject.password;
-    delete userObject.tokens;
-    
-    return userObject;
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
 };
 
 userSchema.methods.generateAuthToken = async function () {
-    const user = this;
-    const token = jwt.sign({ _id: user.id.toString() }, JWT_SECRET );
+  const user = this;
+  const token = jwt.sign({ _id: user.id.toString() }, JWT_SECRET);
 
-    user.tokens = user.tokens.concat({ token });
-    await user.save();
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
 
-    return token;
+  return token;
 };
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-    if(!email) {
-        throw new Error('Unable to login, please retry');
-    }
+  if (!email) {
+    throw new Error('Unable to login, please retry');
+  }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password);
 
-    if(!isMatch) {
-        throw new Error('Unable to login, please retry');
-    }
+  if (!isMatch) {
+    throw new Error('Unable to login, please retry');
+  }
 
-    return user;
+  return user;
 };
 
-userSchema.statics.findByToken = async function(token) {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token': token });
+userSchema.statics.findByToken = async function (token) {
+  const decoded = jwt.verify(token, JWT_SECRET);
+  const user = await User.findOne({ _id: decoded._id, 'tokens.token': token });
 
-    if(!user) {
-        throw new Error();
-    }
+  if (!user) {
+    throw new Error();
+  }
 
-    return user;
+  return user;
 };
 
 const User = mongoose.model('User', userSchema);

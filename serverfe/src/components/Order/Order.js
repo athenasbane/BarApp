@@ -10,6 +10,17 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import OrderDetails from './OrderDetails/OrderDetails';
 
+
+export const timeSince = time => {
+    const now = new Date(Date.now());
+    const newTime = new Date(time);
+    const difference = ((now.getTime() - newTime.getTime()) / 1000).toFixed(0);
+    if (difference > 60) {
+        return `${(difference / 60).toFixed(0)} Minutes ago...`;
+    } 
+    return `${difference} Seconds ago...`;
+};
+
 const Order = props => {
     const [ bgColor, setBgColor ] = React.useState('white');
     const [ fontColor, setFontColor ] = React.useState('black');
@@ -27,24 +38,13 @@ const Order = props => {
     });
 
     const classes = useStyles();
-
-    const timeSince = time => {
-        const now = new Date(Date.now());
-        const newTime = new Date(time);
-        const difference = ((now.getTime() - newTime.getTime()) / 1000).toFixed(0);
-        if (difference > 60) {
-            return `${(difference / 60).toFixed(0)} Minutes ago...`;
-        } 
-        return `${difference} Seconds ago...`;
-    };
-
     const [time, setTime] = React.useState(timeSince(props.order.createdAt));
    
     React.useEffect(function (){
         setInterval(() => {
             setTime(timeSince(props.order.createdAt));
         }, 1000);
-    })
+    });
 
     return (
         <Grid className={classes.root} item>
@@ -75,7 +75,6 @@ const Order = props => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    
                 </AccordionSummary>
                 <AccordionDetails>
                     <OrderDetails order={props.order} toggleColor={workingOnHandler} 

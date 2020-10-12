@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Canvas snapshot renders 1`] = `
+exports[`Canvas Tests renders correctly 1`] = `
 <div
   className="makeStyles-root-1"
 >

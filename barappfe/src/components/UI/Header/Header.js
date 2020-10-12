@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Header = () => {
+export const Header = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>

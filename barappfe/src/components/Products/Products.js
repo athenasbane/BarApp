@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ProductItem from './ProductItem/ProductItem';
 import { loadProducts } from '../../Redux/thunks/products.thunk';
 
-const Products = ({ startLoadingProducts, products }) => {
+export const Products = ({ startLoadingProducts, products }) => {
   React.useEffect(() => {
     startLoadingProducts();
   }, [startLoadingProducts]);

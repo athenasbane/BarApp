@@ -6,7 +6,7 @@ import Increment from '../../../Inputs/Increment/Increment';
 import { addProductToOrder } from '../../../../Redux/actions/order.action';
 import { loadOptions } from '../../../../Redux/thunks/option.thunk';
 
-const ProductForm = ({ options, addToOrder, getOptions, handleChange, title, id }) => {
+export const ProductForm = ({ options, addToOrder, getOptions, handleChange, title, id }) => {
   const addItemHandler = (subOption, volume, price, optionId) => {
     const order = {
       title,
@@ -38,8 +38,6 @@ const ProductForm = ({ options, addToOrder, getOptions, handleChange, title, id 
 
   return <div style={{ width: '100%' }}>{menu}</div>;
 };
-
-// addToOrder, getOptions, handleChange, title, id
 
 ProductForm.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object),

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Footer = ({ order }) => {
+export const Footer = ({ order }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const checkoutClickHandler = () => {

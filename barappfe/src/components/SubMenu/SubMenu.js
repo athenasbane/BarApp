@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 //     path: '/food'
 // }];
 
-const SubMenu = ({ products }) => {
+export const SubMenu = ({ products }) => {
   const breadcrumbData = (products) => {
     const unique = [...new Set(products.map((item) => item.category))];
     if (unique.length > 1) {

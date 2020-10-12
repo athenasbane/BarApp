@@ -13,7 +13,6 @@ const useStyles = makeStyles({
     buttonBox: {
         marginTop: '10px'
     },
-    
 })
 
 const OrderDetails = props => {
@@ -29,13 +28,11 @@ const OrderDetails = props => {
             <Grid className={classes.buttonBox} container item direction="row" spacing={2}>
                 <Grid item xs={6}>
                     <Button
-                    
-                        fullWidth 
+                        fullWidth
                         onClick={props.toggleColor} variant="contained">Working On</Button>
                 </Grid>
                 <Grid item xs={6}>
                     <Button 
-                         
                         fullWidth 
                         onClick={() => props.deliveredHandler(props.order._id)} 
                         variant="contained">Delivered</Button>

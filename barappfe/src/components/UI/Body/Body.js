@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Body = () => {
+export const Body = () => {
   const classes = useStyles();
   return (
     <Container className={classes.root} fixed>

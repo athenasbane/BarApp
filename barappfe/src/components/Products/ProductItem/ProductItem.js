@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProductItem = ({ title, index, active, id }) => {
+export const ProductItem = ({ title, index, active, id }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

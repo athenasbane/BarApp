@@ -5,7 +5,7 @@ import Body from '../Body/Body';
 import Footer from '../Footer/Footer';
 import SubMenu from '../../SubMenu/SubMenu';
 
-const MainLayout = () => (
+export const MainLayout = () => (
   <>
     <Grid container>
       <Grid item xs={12}>

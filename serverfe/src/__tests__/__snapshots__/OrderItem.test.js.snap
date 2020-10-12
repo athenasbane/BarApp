@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderItem Tests renders correctly 1`] = `
+<div
+  className="MuiGrid-root makeStyles-root-1 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-justify-xs-center"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      <strong>
+        Title:
+      </strong>
+       
+      Strongbow
+    </p>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      <strong>
+        Option:
+      </strong>
+       
+      Half-Pint
+    </p>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      <strong>
+        Volume:
+      </strong>
+       
+      3
+    </p>
+  </div>
+</div>
+`;
